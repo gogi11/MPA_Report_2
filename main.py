@@ -1,8 +1,6 @@
 import math
 import random
 
-P = 1
-
 
 def isPointInRect(p, rect):
     [x, y] = p
@@ -102,5 +100,21 @@ def kMeansPlusPlus(points, k):
 def distance(pointA, pointB):
     return ((((pointB[0] - pointA[0])**2) + ((pointB[1] - pointA[1])**2))**0.5)
 
-def cost(pointA, pointB):
-    return 2
+def cost(cluster, centers):
+    total = 0
+    for point in cluster:
+        dist = math.inf
+        for center in centers:
+            dist = min(distance(point, center) ** 2, dist)
+        total += dist
+    return total
+
+
+def costCoreset(coreset, centers):
+    total = 0
+    for point in coreset:
+        dist = math.inf
+        for center in centers:
+            dist = min(point["weight"] * distance(point["point"], center) ** 2, dist)
+        total += dist
+    return total
