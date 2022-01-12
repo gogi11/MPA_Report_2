@@ -31,19 +31,23 @@ def isPointInRect(point, rect):
     return rect[0] <= point[0] <= rect[1] and rect[2] <= point[1] <= rect[3]
 
 
-def allSquaresInCircle(center, radius, squareSize):
-    nr_rows = radius * 2 / squareSize
+def isPointInCircle(point, center, radius):
+    return distance(point, center) <= radius
+
+
+def allSquaresInCircle(center, radius, square_size):
+    nr_rows = math.ceil(radius * 2 / square_size)
     x1 = center[0] - radius
     y1 = center[1] - radius
 
     all_squares = []
-    for i in range(0, math.ceil(nr_rows)):
-        for j in range(0, math.ceil(nr_rows)):
+    for i in range(0, nr_rows):
+        for j in range(0, nr_rows):
             all_squares.append([
-                x1 + i * squareSize,
-                x1 + (i + 1) * squareSize,
-                y1 + j * squareSize,
-                y1 + (j + 1) * squareSize
+                x1 + i * square_size,
+                x1 + (i + 1) * square_size,
+                y1 + j * square_size,
+                y1 + (j + 1) * square_size
             ])
     return all_squares
 
