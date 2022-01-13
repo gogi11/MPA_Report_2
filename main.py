@@ -1,8 +1,10 @@
 from datetime import datetime
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
+
+from clustering import getClusters, getClustersCoreset
 from coreset import coresetConstruction
-from kMeansPP import kMeansPlusPlus
+from kMeansPP import kMeansPlusPlus, kMeansPlusPlusCoreset
 
 
 def main():
@@ -18,9 +20,27 @@ def main():
     coreset = coresetConstruction(points=blobs, centroids=centroids)
     print("Coreset Construction took " + str(datetime.now() - start_time))
 
-    plt.plot([g[0] for g in blobs], [g[1] for g in blobs], 'bo')
-    plt.plot([g["point"][0] for g in coreset], [g["point"][1] for g in coreset], 'ro')
-    plt.plot([g[0] for g in centroids], [g[1] for g in centroids], 'yo')
+    coreset_centroids = kMeansPlusPlusCoreset(coreset=coreset, k=3)
+
+    colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', '#777']
+    i = 0
+
+    print(len(centroids))
+
+    for cluster in getClusters(blobs, centroids):
+        plt.plot([g[0] for g in cluster], [g[1] for g in cluster], colors[i] + 'o')
+        i += 1
+
+    for cluster in getClustersCoreset(coreset, coreset_centroids):
+        plt.plot([g["point"][0] for g in cluster], [g["point"][1] for g in cluster], colors[i] + 'o')
+        i += 1
+
+    plt.plot([g[0] for g in centroids], [g[1] for g in centroids], colors[i] + 'o')
+    i += 1
+
+    plt.plot([g[0] for g in coreset_centroids], [g[1] for g in coreset_centroids], 'o', color=colors[i])
+    i += 1
+
     plt.show()
 
 

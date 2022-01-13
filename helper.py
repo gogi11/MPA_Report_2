@@ -1,4 +1,5 @@
 import math
+import random
 
 import numpy as np
 
@@ -35,6 +36,13 @@ def isPointInCircle(point, center, radius):
     return distance(point, center) <= radius
 
 
+def generateRandomPointInSquare(square):
+    return [
+        square[0] + (square[1] - square[0] + 1) * random.random(),
+        square[2] + (square[3] - square[2] + 1) * random.random()
+    ]
+
+
 def allSquaresInCircle(center, radius, square_size):
     nr_rows = math.ceil(radius * 2 / square_size)
     x1 = center[0] - radius
@@ -58,4 +66,3 @@ def deleteIndicesFromNumpyArray(arr, indices):
         arr = np.delete(arr, index - i, axis=0)
         i += 1
     return arr
-

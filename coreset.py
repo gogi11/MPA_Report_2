@@ -29,7 +29,7 @@ def coresetConstruction(points, centroids, epsilon=0.2):
 
                 if len(all_points_in_square) > 0:
                     # select arbitrary point as representative (rep)
-                    rep = all_points_in_square[math.floor(random.random() * len(all_points_in_square))]
+                    rep = generateRandomPointInSquare(square)
                     coreset.append({
                         "point": rep,
                         "weight": len(all_points_in_square),
