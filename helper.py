@@ -38,8 +38,8 @@ def isPointInCircle(point, center, radius):
 
 def generateRandomPointInSquare(square):
     return [
-        square[0] + (square[1] - square[0] + 1) * random.random(),
-        square[2] + (square[3] - square[2] + 1) * random.random()
+        square[0] + (square[1] - square[0]) * random.random(),
+        square[2] + (square[3] - square[2]) * random.random()
     ]
 
 

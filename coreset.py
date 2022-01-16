@@ -1,4 +1,3 @@
-import random
 from helper import *
 
 
@@ -13,12 +12,16 @@ def coresetConstruction(points, centroids, epsilon=0.2):
 
     radius = math.sqrt(cost(points, centroids) / (a * log_n * n))
 
+    squares = []
+
     for j in range(0, math.ceil(z)):
         radius_to_power = radius * (2 ** j)
         x = epsilon * radius_to_power / math.sqrt(dimensions)
 
         for centroid in centroids:
+            squares.append([])
             for square in allSquaresInCircle(centroid, radius_to_power, x):
+                squares[-1].append(square)
                 all_points_in_square = []
                 all_indices = []
 
@@ -37,4 +40,4 @@ def coresetConstruction(points, centroids, epsilon=0.2):
                     })
                     points = deleteIndicesFromNumpyArray(arr=points, indices=all_indices)
 
-    return coreset
+    return coreset, squares

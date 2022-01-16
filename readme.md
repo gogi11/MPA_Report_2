@@ -6,7 +6,8 @@
 
 ## How to use:
 1. Calculate `k` centroids with `kMeansPlusPlus(points, k)`
-1. Calculate the `(k, epsilon)` coreset of those centroids with `coresetConstruction(blobs, centroids)`
+1. Calculate the `(k, epsilon)` coreset of those centroids with `coresetConstruction(blobs, centroids)`. It returns 
+`coreset, squares` so that you can keep track of the squares if you wish to.
 1. Profit?????
 
 ## Files:
