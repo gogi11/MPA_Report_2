@@ -1,15 +1,13 @@
 from helper import *
 
 
-def coresetConstruction(points, centroids, epsilon=0.2):
+def coresetConstruction(points, centroids, epsilon=0.2, a=1):
     coreset = []
 
     n = len(points)
-    dimensions = 2
-    a = 1
+    dimensions = len(points[0])
     log_n = math.log(n)
     z = log_n * math.log(a * log_n)
-
     radius = math.sqrt(cost(points, centroids) / (a * log_n * n))
 
     squares = []
